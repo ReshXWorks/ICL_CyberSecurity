@@ -8,15 +8,18 @@ def save_result(line, output_file):
             f.write(line + "\n")
 
 
-def scan_url(base_url, word, extensions, show_codes, output_file):
+def scan_url(base_url, word, extensions, show_codes, output_file, verbose):
     word = word.strip()
 
     headers = {
-        "User-Agent": "Mozilla/5.0 (DirHunter Scanner)"
+        "User-Agent": "Mozilla/5.0 (SimpleScanner)"
     }
 
     for ext in extensions:
         url = f"{base_url.rstrip('/')}/{word}{ext}"
+
+        if verbose:
+            print(f"[~] Trying: {url}")
 
         try:
             response = requests.get(url, headers=headers, timeout=3)
@@ -31,16 +34,18 @@ def scan_url(base_url, word, extensions, show_codes, output_file):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="DirHunter - Directory Enumeration Tool")
+    parser = argparse.ArgumentParser(description="SimpleScanner - Directory Enumeration Tool")
 
     parser.add_argument("-u", "--url", required=True, help="Target URL")
     parser.add_argument("-w", "--wordlist", required=True, help="Wordlist file")
     parser.add_argument("-t", "--threads", type=int, default=10, help="Number of threads")
     parser.add_argument("-s", "--show", default="200,301,302,403",
                         help="Status codes to show (comma-separated)")
-    parser.add_argument("-e", "--ext", default=".php,.html,.txt,",
-                        help="Extensions (comma-separated, include empty for dirs)")
+    parser.add_argument("-e", "--ext", default=".php,.html,.txt",
+                        help="Extensions (comma-separated)")
     parser.add_argument("-o", "--output", help="Save results to file (optional)")
+    parser.add_argument("-v", "--verbose", action="store_true",
+                        help="Enable verbose output")
 
     args = parser.parse_args()
 
@@ -48,8 +53,13 @@ def main():
     wordlist_path = args.wordlist
     threads = args.threads
     show_codes = list(map(int, args.show.split(",")))
-    extensions = args.ext.split(",")
+
+    extensions = [ext.strip() for ext in args.ext.split(",") if ext.strip()]
+    if "" not in extensions:
+        extensions.append("")
+
     output_file = args.output
+    verbose = args.verbose
 
     print(f"\n[+] Target: {base_url}")
     print(f"[+] Threads: {threads}")
@@ -73,8 +83,15 @@ def main():
 
     with ThreadPoolExecutor(max_workers=threads) as executor:
         for word in words:
-            executor.submit(scan_url, base_url, word, extensions, show_codes, output_file)
-
+            executor.submit(
+                scan_url,
+                base_url,
+                word,
+                extensions,
+                show_codes,
+                output_file,
+                verbose
+            )
 
 if __name__ == "__main__":
     main()
