@@ -24,8 +24,7 @@ cd ICL_CyberSecurity
 pip install requests
 ```
 
-## Usage
-### Basic Usage
+## Basic Usage
 
 ```bash
 python main.py -u http://example.com -w wordlist.txt
@@ -42,8 +41,6 @@ python main.py -u http://example.com -w wordlist.txt
 | `-e`   | `--ext`      | File extensions to brute-force (comma-separated). Include empty value for directories | `-e .php,.html,.txt,`   |
 | `-o`   | `--output`   | Save results to file (optional)                                                       | `-o results.txt`        |
 | `-v`   | `--verbose`  | Show all requests                                                                     | `-v`                    |
-
----
 
 ## Advanced Usage Examples
 
