@@ -10,6 +10,7 @@ Its a lightweight web application directory and file enumeration tool built in P
 - Smart response filtering to reduce false positives
 - Custom User-Agent support
 - Optional output file saving
+- Verbose mode for debugging
 - Command-line interface (CLI)
 
 ---
@@ -40,6 +41,7 @@ python main.py -u http://example.com -w wordlist.txt
 | `-s`   | `--show`     | Status codes to display (comma-separated)                                             | `-s 200,403`            |
 | `-e`   | `--ext`      | File extensions to brute-force (comma-separated). Include empty value for directories | `-e .php,.html,.txt,`   |
 | `-o`   | `--output`   | Save results to file (optional)                                                       | `-o results.txt`        |
+| `-v`   | `--verbose`  | Show all requests                                                                     | `-v`                    |
 
 ---
 
@@ -73,6 +75,11 @@ python main.py -u http://example.com -w wordlist.txt -o results.txt
 
 ```bash
 python main.py -u http://example.com -w wordlist.txt -t 20 -s 200,403 -e .php,.html,.txt, -o results.txt
+```
+
+### 6. Verbose mode
+```bash
+python simplescanner.py -u http://example.com -w wordlist.txt -v
 ```
 
 ---
