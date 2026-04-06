@@ -81,20 +81,7 @@ python simplescanner.py -u http://example.com -w wordlist.txt -v
 
 ---
 
-## Example Target
 
-```bash
-python simplescanner.py -u http://testphp.vulnweb.com -w wordlist.txt -t 20 -o results.txt
-```
-
-## 📊 Sample Output
-
-```
-[200] http://example.com/admin (size: 5321)
-[403] http://example.com/dashboard (size: 1200)
-```
-
----
 
 
 
