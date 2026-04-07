@@ -79,10 +79,12 @@ python simplescanner.py -u http://example.com -w wordlist.txt -t 20 -s 200,403 -
 python simplescanner.py -u http://example.com -w wordlist.txt -v
 ```
 
----
+### Example:
 <img width="840" height="366" alt="image" src="https://github.com/user-attachments/assets/e9c4950f-f58c-43cc-a50c-c5ee307b8b77" />
 
 ---
+
+### Comparison with Gobuster:
 <img width="761" height="174" alt="image" src="https://github.com/user-attachments/assets/8fed2685-886f-48b3-b186-c6a0fcde2ec0" />
 
 
